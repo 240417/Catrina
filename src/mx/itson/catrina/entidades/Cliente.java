@@ -7,7 +7,7 @@ package mx.itson.catrina.entidades;
 
 /**
  *
- * @author Jesus
+ * @author Alejandra Medina
  */
 public class Cliente {
     

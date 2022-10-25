@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  *
- * @author Jesus
+ * @author Alejandra Medina
  */
 public class Movimientos {
     private String descripcion;

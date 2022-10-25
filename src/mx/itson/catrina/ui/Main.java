@@ -7,7 +7,7 @@ package mx.itson.catrina.ui;
 
 /**
  *
- * @author Jesus
+ * @author Alejandra Medina
  */
 public class Main extends javax.swing.JFrame {
 
