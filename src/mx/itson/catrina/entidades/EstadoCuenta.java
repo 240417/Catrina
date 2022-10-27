@@ -5,6 +5,7 @@
  */
 package mx.itson.catrina.entidades;
 
+import com.google.gson.Gson;
 import java.util.List;
 
 /**
@@ -14,12 +15,25 @@ import java.util.List;
 public class EstadoCuenta {
     
     private String producto;
-    private int cuenta;
-    private int clabe;
+    private String cuenta;
+    private String clabe;
     private String moneda;
     private Cliente cliente;
+    private Movimiento tipo;
     private List<Movimiento> movimientos;
 
+    
+    public EstadoCuenta deserializar (String json){
+        EstadoCuenta estado = new EstadoCuenta();
+        try{
+            estado= new Gson().fromJson(json, estado.getClass());
+            
+        }catch(Exception er){
+            System.err.print("Ocurrio un error: "+er.getMessage());
+        }
+        return estado;
+    }
+    
     /**
      * @return the producto
      */
@@ -37,28 +51,28 @@ public class EstadoCuenta {
     /**
      * @return the cuenta
      */
-    public int getCuenta() {
+    public String getCuenta() {
         return cuenta;
     }
 
     /**
      * @param cuenta the cuenta to set
      */
-    public void setCuenta(int cuenta) {
+    public void setCuenta(String cuenta) {
         this.cuenta = cuenta;
     }
 
     /**
      * @return the clabe
      */
-    public int getClabe() {
+    public String getClabe() {
         return clabe;
     }
 
     /**
      * @param clabe the clabe to set
      */
-    public void setClabe(int clabe) {
+    public void setClabe(String clabe) {
         this.clabe = clabe;
     }
 
@@ -102,6 +116,20 @@ public class EstadoCuenta {
      */
     public void setMovimientos(List<Movimiento> movimientos) {
         this.movimientos = movimientos;
+    }
+
+    /**
+     * @return the tipo
+     */
+    public Movimiento getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(Movimiento tipo) {
+        this.tipo = tipo;
     }
     
     

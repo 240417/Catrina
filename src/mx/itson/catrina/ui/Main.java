@@ -5,6 +5,15 @@
  */
 package mx.itson.catrina.ui;
 
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
+import mx.itson.catrina.entidades.EstadoCuenta;
+import mx.itson.catrina.entidades.Movimiento;
+import mx.itson.catrina.enumerador.Tipo;
+
 /**
  *
  * @author Alejandra Medina
@@ -33,13 +42,13 @@ public class Main extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
+        tblMovimientos = new javax.swing.JTable();
+        lblNombre = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblRfc = new javax.swing.JLabel();
+        lblLugar = new javax.swing.JLabel();
+        lblDireccion = new javax.swing.JLabel();
+        lblCp = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -49,9 +58,9 @@ public class Main extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
+        lblCuenta = new javax.swing.JLabel();
+        lblClabe = new javax.swing.JLabel();
+        lblMoneda = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -78,7 +87,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMovimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -86,36 +95,36 @@ public class Main extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "FECHA", "DESCRIPCIÓN", "DEPÓSITO", "RETIRO", "SUBTOTAL"
+                "FECHA", "DESCRIPCIÓN", "Deposito", "Retiro", "Subtotal"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblMovimientos);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("NOMBRE");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblNombre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblNombre.setText("NOMBRE");
+        lblNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("CUENTA CONTABLE");
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("RFC");
+        lblRfc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblRfc.setText("RFC");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("ESTADO Y MUNICIPIO");
+        lblLugar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblLugar.setText("ESTADO Y MUNICIPIO");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("DIRECCIÓN");
+        lblDireccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblDireccion.setText("DIRECCIÓN");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("C.P");
+        lblCp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblCp.setText("C.P");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("MONEDA");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("CABLE");
+        jLabel11.setText("CLABE");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("CUENTA");
@@ -141,11 +150,11 @@ public class Main extends javax.swing.JFrame {
         jLabel18.setText("DETALLE DE MOVIMIENTOS");
         jLabel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel19.setText("jLabel19");
+        lblCuenta.setText("jLabel19");
 
-        jLabel20.setText("jLabel20");
+        lblClabe.setText("jLabel20");
 
-        jLabel21.setText("jLabel21");
+        lblMoneda.setText("jLabel21");
 
         jLabel22.setText("jLabel22");
 
@@ -190,11 +199,11 @@ public class Main extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+                    .addComponent(lblCp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblDireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblRfc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblLugar, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
                 .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -202,15 +211,15 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel21))
+                                .addComponent(lblMoneda))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel20))
+                                .addComponent(lblClabe))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addGap(53, 53, 53)
-                                .addComponent(jLabel19)))
+                                .addComponent(lblCuenta)))
                         .addGap(134, 134, 134))
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
@@ -227,25 +236,25 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(lblNombre)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(lblRfc)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel19))
+                    .addComponent(lblCuenta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
+                    .addComponent(lblDireccion)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20))
+                    .addComponent(lblClabe))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(lblLugar)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel21))
+                    .addComponent(lblMoneda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
+                .addComponent(lblCp)
                 .addGap(34, 34, 34)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -277,7 +286,48 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        try{
+            
+        JFileChooser jfileChooser = new JFileChooser();
+        
+        jfileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        
+        if(jfileChooser.showOpenDialog(this)==JFileChooser.APPROVE_OPTION);
+        File archivo = jfileChooser.getSelectedFile();
+        
+        byte archivoBytes [] = Files.readAllBytes(archivo.toPath());
+            
+        //Guardamos el contenido del JSON en una variable para poder deserializarlo despues
+        String contenido = new String(archivoBytes, StandardCharsets.UTF_8);
+          
+        
+        //Importamos la receta deserealizada
+        EstadoCuenta estado = new EstadoCuenta().deserializar(contenido);
+        
+        lblNombre.setText(estado.getCliente().getNombre());
+        lblRfc.setText(estado.getCliente().getRfc());
+        lblDireccion.setText(estado.getCliente().getDomicilio());
+        lblLugar.setText(estado.getCliente().getCiudad());
+        lblCp.setText(estado.getCliente().getCp());
+        lblCuenta.setText(estado.getCuenta());
+        lblClabe.setText(estado.getClabe());
+        lblMoneda.setText(estado.getMoneda());
+        //Declaremos que el contenido del la tabla ingredientes sera manejado por modelo
+        DefaultTableModel modelo = (DefaultTableModel) tblMovimientos.getModel();
+        modelo.setRowCount(0);
+        
+        
+        for(Movimiento d : estado.getMovimientos()){
+            if(d.getTipo()==Tipo.Desposito){
+                d.setDeposito(d.getCantidad());
+            }else{
+                d.setRetiro(d.getCantidad());
+            }
+                modelo.addRow(new Object[]{d.getFecha(),d.getDescripcion(),d.getDeposito(),d.getRetiro()});
+            }
+        }catch(Exception e){
+            System.err.print("Ocurrio un error: "+e.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -328,22 +378,22 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblClabe;
+    private javax.swing.JLabel lblCp;
+    private javax.swing.JLabel lblCuenta;
+    private javax.swing.JLabel lblDireccion;
+    private javax.swing.JLabel lblLugar;
+    private javax.swing.JLabel lblMoneda;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblRfc;
+    private javax.swing.JTable tblMovimientos;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.itson.catrina.enumerador;
-
-import com.google.gson.annotations.SerializedName;
+package mx.itson.catrina.entidades;
 
 /**
  *
  * @author Jesus
  */
-public enum Tipo {
-    @SerializedName("1")
-    Desposito,
-    @SerializedName("2")
-    Retiro;
+public class Resumen {
+    
+    private double subtotal;
     
 }

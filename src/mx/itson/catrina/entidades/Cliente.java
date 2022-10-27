@@ -15,8 +15,8 @@ public class Cliente {
     private String domicilio;
     private String ciudad;
     private String rfc;
-    private int cp; 
-    private int codigo; 
+    private String cp; 
+    private String codigo; 
 
     /**
      * @return the nombre
@@ -77,28 +77,28 @@ public class Cliente {
     /**
      * @return the cp
      */
-    public int getCp() {
+    public String getCp() {
         return cp;
     }
 
     /**
      * @param cp the cp to set
      */
-    public void setCp(int cp) {
+    public void setCp(String cp) {
         this.cp = cp;
     }
 
     /**
      * @return the codigo
      */
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
     /**
      * @param codigo the codigo to set
      */
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
     
