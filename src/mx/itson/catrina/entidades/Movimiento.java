@@ -20,6 +20,7 @@ public class Movimiento {
     private Tipo tipo;
     private double deposito;
     private double retiro;
+    private double subTotal;
 
     /**
      * @return the descripcion
@@ -113,6 +114,20 @@ public class Movimiento {
           //  retiro=cantidad;
         //}
         this.retiro = retiro;
+    }
+
+    /**
+     * @return the subTotal
+     */
+    public double getSubTotal() {
+        return subTotal;
+    }
+
+    /**
+     * @param subTotal the subTotal to set
+     */
+    public void setSubTotal(double subTotal) {
+        this.subTotal = subTotal;
     }
     
 }

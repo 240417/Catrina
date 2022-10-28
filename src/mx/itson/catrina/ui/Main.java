@@ -8,6 +8,8 @@ package mx.itson.catrina.ui;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.catrina.entidades.EstadoCuenta;
@@ -206,22 +208,20 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(lblLugar, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
                 .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblMoneda))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblClabe))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(53, 53, 53)
-                                .addComponent(lblCuenta)))
-                        .addGap(134, 134, 134))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblMoneda))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblClabe))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel12)
+                            .addGap(53, 53, 53)
+                            .addComponent(lblCuenta)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,23 +287,25 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
-            
+            //Utilizamos en JFileChooser para poder llamar al archivo
         JFileChooser jfileChooser = new JFileChooser();
-        
         jfileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         
+        //Si se selecciona la carpeta correcta mostrara el contenido en el swim 
         if(jfileChooser.showOpenDialog(this)==JFileChooser.APPROVE_OPTION);
         File archivo = jfileChooser.getSelectedFile();
         
+        //Tomamos el contenido del archivo
         byte archivoBytes [] = Files.readAllBytes(archivo.toPath());
             
         //Guardamos el contenido del JSON en una variable para poder deserializarlo despues
         String contenido = new String(archivoBytes, StandardCharsets.UTF_8);
           
         
-        //Importamos la receta deserealizada
+        //Importamos el documento deserealizado
         EstadoCuenta estado = new EstadoCuenta().deserializar(contenido);
         
+        //Imprimimos el contenido en el swim
         lblNombre.setText(estado.getCliente().getNombre());
         lblRfc.setText(estado.getCliente().getRfc());
         lblDireccion.setText(estado.getCliente().getDomicilio());
@@ -312,20 +314,29 @@ public class Main extends javax.swing.JFrame {
         lblCuenta.setText(estado.getCuenta());
         lblClabe.setText(estado.getClabe());
         lblMoneda.setText(estado.getMoneda());
-        //Declaremos que el contenido del la tabla ingredientes sera manejado por modelo
+        
+        //Declaremos que el contenido del la tabla movimientos sera manejado por modelo
         DefaultTableModel modelo = (DefaultTableModel) tblMovimientos.getModel();
         modelo.setRowCount(0);
         
+        //Damos el formato en el que se presentara la fecha de la tabla a imprimir
+        DateFormat formatFecha = new SimpleDateFormat("dd/MMMM/YYYY");
         
+        //Organizamos las fechas de menor(acendente) a mayor(desendente)
+        estado.getMovimientos().sort((mov1,mov2)->mov1.getFecha().compareTo(mov2.getFecha()));
+        
+        //Se acomodan los datos de la tabla en sus respectivos lugares y se mandan a imprimir
         for(Movimiento d : estado.getMovimientos()){
+            //Validamos si la cantidad ingresada es deposito o retiro
             if(d.getTipo()==Tipo.Desposito){
                 d.setDeposito(d.getCantidad());
             }else{
                 d.setRetiro(d.getCantidad());
             }
-                modelo.addRow(new Object[]{d.getFecha(),d.getDescripcion(),d.getDeposito(),d.getRetiro()});
+                modelo.addRow(new Object []{formatFecha.format(d.getFecha()),d.getDescripcion(),d.getDeposito(),d.getRetiro()});
             }
         }catch(Exception e){
+            //Si ocurrio algo mal en el momento de relizar la acción se mandara un mensaje de error
             System.err.print("Ocurrio un error: "+e.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
