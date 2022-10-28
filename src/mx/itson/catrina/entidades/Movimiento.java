@@ -127,6 +127,7 @@ public class Movimiento {
      * @param subTotal the subTotal to set
      */
     public void setSubTotal(double subTotal) {
+        
         this.subTotal = subTotal;
     }
     

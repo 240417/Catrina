@@ -63,9 +63,9 @@ public class Main extends javax.swing.JFrame {
         lblCuenta = new javax.swing.JLabel();
         lblClabe = new javax.swing.JLabel();
         lblMoneda = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
+        lblSaldoInicial = new javax.swing.JLabel();
+        lblDepositos = new javax.swing.JLabel();
+        lblRetiros = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -158,11 +158,11 @@ public class Main extends javax.swing.JFrame {
 
         lblMoneda.setText("jLabel21");
 
-        jLabel22.setText("jLabel22");
+        lblSaldoInicial.setText("jLabel22");
 
-        jLabel23.setText("jLabel23");
+        lblDepositos.setText("jLabel23");
 
-        jLabel24.setText("jLabel24");
+        lblRetiros.setText("jLabel24");
 
         jLabel25.setText("jLabel25");
 
@@ -195,9 +195,9 @@ public class Main extends javax.swing.JFrame {
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel25)
-                            .addComponent(jLabel24)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel22))
+                            .addComponent(lblRetiros)
+                            .addComponent(lblDepositos)
+                            .addComponent(lblSaldoInicial))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -260,15 +260,15 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel22))
+                    .addComponent(lblSaldoInicial))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel23))
+                    .addComponent(lblDepositos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jLabel24))
+                    .addComponent(lblRetiros))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -315,6 +315,10 @@ public class Main extends javax.swing.JFrame {
         lblClabe.setText(estado.getClabe());
         lblMoneda.setText(estado.getMoneda());
         
+        //String dep=String.valueOf(estado.getResumen().getDepositos());
+        //lblSaldoInicial.setText((estado.getResumen().getSaldoInicial()));
+        //lblDepositos.setText(dep);
+        /*lblRetiros.setText((estado.getResumen().getRetiros()));*/
         //Declaremos que el contenido del la tabla movimientos sera manejado por modelo
         DefaultTableModel modelo = (DefaultTableModel) tblMovimientos.getModel();
         modelo.setRowCount(0);
@@ -330,10 +334,12 @@ public class Main extends javax.swing.JFrame {
             //Validamos si la cantidad ingresada es deposito o retiro
             if(d.getTipo()==Tipo.Desposito){
                 d.setDeposito(d.getCantidad());
+                d.setSubTotal(d.getSubTotal()+d.getCantidad());
             }else{
                 d.setRetiro(d.getCantidad());
+                d.setSubTotal(d.getSubTotal()-d.getCantidad());
             }
-                modelo.addRow(new Object []{formatFecha.format(d.getFecha()),d.getDescripcion(),d.getDeposito(),d.getRetiro()});
+                modelo.addRow(new Object []{formatFecha.format(d.getFecha()),d.getDescripcion(),d.getDeposito(),d.getRetiro(),d.getSubTotal()});
             }
         }catch(Exception e){
             //Si ocurrio algo mal en el momento de relizar la acción se mandara un mensaje de error
@@ -390,9 +396,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -400,11 +403,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel lblClabe;
     private javax.swing.JLabel lblCp;
     private javax.swing.JLabel lblCuenta;
+    private javax.swing.JLabel lblDepositos;
     private javax.swing.JLabel lblDireccion;
     private javax.swing.JLabel lblLugar;
     private javax.swing.JLabel lblMoneda;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblRetiros;
     private javax.swing.JLabel lblRfc;
+    private javax.swing.JLabel lblSaldoInicial;
     private javax.swing.JTable tblMovimientos;
     // End of variables declaration//GEN-END:variables
 }

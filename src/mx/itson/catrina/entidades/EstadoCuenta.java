@@ -21,6 +21,7 @@ public class EstadoCuenta {
     private Cliente cliente;
     private Movimiento tipo;
     private List<Movimiento> movimientos;
+    private Resumen resumen;
 
     
     public EstadoCuenta deserializar (String json){
@@ -130,6 +131,20 @@ public class EstadoCuenta {
      */
     public void setTipo(Movimiento tipo) {
         this.tipo = tipo;
+    }
+
+    /**
+     * @return the resumen
+     */
+    public Resumen getResumen() {
+        return resumen;
+    }
+
+    /**
+     * @param resumen the resumen to set
+     */
+    public void setResumen(Resumen resumen) {
+        this.resumen = resumen;
     }
     
     
