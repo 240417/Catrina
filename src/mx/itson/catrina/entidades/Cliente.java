@@ -17,6 +17,7 @@ public class Cliente {
     private String rfc;
     private String cp; 
     private String codigo; 
+    private Movimiento movimiento;
 
     /**
      * @return the nombre
@@ -100,6 +101,20 @@ public class Cliente {
      */
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    /**
+     * @return the movimiento
+     */
+    public Movimiento getMovimiento() {
+        return movimiento;
+    }
+
+    /**
+     * @param movimiento the movimiento to set
+     */
+    public void setMovimiento(Movimiento movimiento) {
+        this.movimiento = movimiento;
     }
     
 }

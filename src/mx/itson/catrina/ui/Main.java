@@ -9,7 +9,9 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.catrina.entidades.EstadoCuenta;
@@ -66,7 +68,8 @@ public class Main extends javax.swing.JFrame {
         lblSaldoInicial = new javax.swing.JLabel();
         lblDepositos = new javax.swing.JLabel();
         lblRetiros = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        lblSaldoFinal = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,7 +167,18 @@ public class Main extends javax.swing.JFrame {
 
         lblRetiros.setText("jLabel24");
 
-        jLabel25.setText("jLabel25");
+        lblSaldoFinal.setText("jLabel25");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 22, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,8 +196,8 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)
                         .addGap(24, 24, 24))
                     .addGroup(layout.createSequentialGroup()
@@ -194,7 +208,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jLabel16))
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel25)
+                            .addComponent(lblSaldoFinal)
                             .addComponent(lblRetiros)
                             .addComponent(lblDepositos)
                             .addComponent(lblSaldoInicial))
@@ -207,21 +221,24 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblLugar, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
                 .addGap(79, 79, 79)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel10)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblMoneda))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel11)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblClabe))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel12)
-                            .addGap(53, 53, 53)
-                            .addComponent(lblCuenta)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblMoneda))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblClabe))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(53, 53, 53)
+                                .addComponent(lblCuenta)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,16 +256,21 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(lblNombre)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRfc)
-                    .addComponent(jLabel12)
-                    .addComponent(lblCuenta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDireccion)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblClabe))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRfc)
+                            .addComponent(jLabel12)
+                            .addComponent(lblCuenta))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDireccion)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblClabe))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLugar)
                     .addComponent(jLabel10)
@@ -276,9 +298,9 @@ public class Main extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel25)
+                        .addComponent(lblSaldoFinal)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -316,31 +338,50 @@ public class Main extends javax.swing.JFrame {
         lblMoneda.setText(estado.getMoneda());
         
         //String dep=String.valueOf(estado.getResumen().getDepositos());
-        //lblSaldoInicial.setText((estado.getResumen().getSaldoInicial()));
-        //lblDepositos.setText(dep);
-        /*lblRetiros.setText((estado.getResumen().getRetiros()));*/
+        //lblSaldoInicial.setText(estado.getCliente().getMovimiento().getDescripcion());
+        
+        
         //Declaremos que el contenido del la tabla movimientos sera manejado por modelo
         DefaultTableModel modelo = (DefaultTableModel) tblMovimientos.getModel();
         modelo.setRowCount(0);
         
         //Damos el formato en el que se presentara la fecha de la tabla a imprimir
-        DateFormat formatFecha = new SimpleDateFormat("dd/MMMM/YYYY");
+        DateFormat formatFecha = new SimpleDateFormat("dd/MM/YYYY");
         
         //Organizamos las fechas de menor(acendente) a mayor(desendente)
         estado.getMovimientos().sort((mov1,mov2)->mov1.getFecha().compareTo(mov2.getFecha()));
         
-        //Se acomodan los datos de la tabla en sus respectivos lugares y se mandan a imprimir
+        Locale local = new Locale("es","MX");
+        NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(local);
+        
+        double subtotal=0;
+        double retiros=0;
+        double depositos=0;
+        Movimiento mov = new Movimiento();
+        //Se acomodan los datos de la tabla en sus respectivos lugares y se mandan a imprimir junto con los datos de resumen
         for(Movimiento d : estado.getMovimientos()){
             //Validamos si la cantidad ingresada es deposito o retiro
             if(d.getTipo()==Tipo.Desposito){
                 d.setDeposito(d.getCantidad());
-                d.setSubTotal(d.getSubTotal()+d.getCantidad());
+                subtotal+=d.getCantidad();
+                d.setSubTotal(subtotal);
+                depositos+=d.getDeposito();
+                
             }else{
                 d.setRetiro(d.getCantidad());
-                d.setSubTotal(d.getSubTotal()-d.getCantidad());
+                subtotal-=d.getCantidad();
+                d.setSubTotal(subtotal);
+                retiros+=d.getRetiro();
+                
             }
-                modelo.addRow(new Object []{formatFecha.format(d.getFecha()),d.getDescripcion(),d.getDeposito(),d.getRetiro(),d.getSubTotal()});
+            
+                modelo.addRow(new Object []{formatFecha.format(d.getFecha()),d.getDescripcion(),formatoMoneda.format(d.getDeposito()),formatoMoneda.format(d.getRetiro()),formatoMoneda.format(d.getSubTotal())});
+                lblDepositos.setText(""+formatoMoneda.format(depositos));
+                lblRetiros.setText(""+formatoMoneda.format(retiros));
+                lblSaldoFinal.setText(""+formatoMoneda.format(d.getSubTotal()));
             }
+        
+        
         }catch(Exception e){
             //Si ocurrio algo mal en el momento de relizar la acción se mandara un mensaje de error
             System.err.print("Ocurrio un error: "+e.getMessage());
@@ -396,9 +437,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblClabe;
     private javax.swing.JLabel lblCp;
@@ -410,6 +451,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRetiros;
     private javax.swing.JLabel lblRfc;
+    private javax.swing.JLabel lblSaldoFinal;
     private javax.swing.JLabel lblSaldoInicial;
     private javax.swing.JTable tblMovimientos;
     // End of variables declaration//GEN-END:variables
