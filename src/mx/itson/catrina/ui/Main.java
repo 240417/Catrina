@@ -350,6 +350,7 @@ public class Main extends javax.swing.JFrame {
         double saldoInicial=0;
         double retiros=0;
         double depositos=0;
+        double saldoFinal=0;
         int meses= cbxMeses.getSelectedIndex()-1;
         
         // Se crea una lista para almacenar los dias del mes 
@@ -404,11 +405,12 @@ public class Main extends javax.swing.JFrame {
                 
            }
            }
+           saldoFinal=depositos-retiros;
            //Imprimimos los datos del resumen
            lblSaldoInicial.setText(""+formatoMoneda.format(saldoInicial));
            lblDepositos.setText(""+formatoMoneda.format(depositos));
            lblRetiros.setText(""+formatoMoneda.format(retiros));
-           lblSaldoFinal.setText(""+formatoMoneda.format(depositos-retiros));
+           lblSaldoFinal.setText(""+formatoMoneda.format(saldoFinal));
        
         }catch(Exception e){
             //Si ocurrio algo mal en el momento de relizar la acción se mandara un mensaje de error
