@@ -203,10 +203,10 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jLabel16))
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblDepositos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblRetiros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblSaldoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSaldoFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                            .addComponent(lblSaldoFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                            .addComponent(lblDepositos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblSaldoInicial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -385,7 +385,7 @@ public class Main extends javax.swing.JFrame {
                 
             }
             //Imprimimos la lista
-                modelo.addRow(new Object []{formatFecha.format(b.getFecha()),b.getDescripcion(),formatoMoneda.format(b.getDeposito()),formatoMoneda.format(b.getRetiro()),formatoMoneda.format(b.getSubTotal())});
+                modelo.addRow(new Object []{formatFecha.format(b.getFecha()),b.getDescripcion(),formatoMoneda.format(b.getDeposito()),formatoMoneda.format(b.getRetiro()),formatoMoneda.format(depositos-retiros)});
                
             }
             }else{
