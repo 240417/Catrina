@@ -32,9 +32,7 @@ public class Movimiento {
     private double deposito;
     private double retiro;
     private double subTotal;
-    private double saldoInicial;
-    private double depositos;
-    private double retiros;
+
     
      
     /**
@@ -138,56 +136,8 @@ public class Movimiento {
     /**
      * @param subTotal the subTotal to set
      */
-    public void setSubTotal(double subTotal, int meses) {
-        
+    public void setSubTotal(double subTotal) {
         this.subTotal = subTotal;
     }
 
-    /**
-     * @return the saldoInicial
-     */
-    /**
-     * @return the saldoInicial
-     */
-    public double getSaldoInicial() {
-        return saldoInicial;
-    }
-
-    /**
-     * @param saldoInicial the saldoInicial to set
-     */
-    public void setSaldoInicial(double saldoInicial) {
-        this.saldoInicial = saldoInicial;
-    }
-
-    /**
-     * @return the depositos
-     */
-    public double getDepositos() {
-        
-        return depositos;
-    }
-
-    /**
-     * @param depositos the depositos to set
-     */
-    public void setDepositos(double depositos) {
-        this.depositos = depositos;
-    }
-
-    /**
-     * @return the retiros
-     */
-    public double getRetiros() {
-        return retiros;
-    }
-
-    /**
-     * @param retiros the retiros to set
-     */
-    public void setRetiros(double retiros) {
-        this.retiros = retiros;
-    }
 }
-
-
