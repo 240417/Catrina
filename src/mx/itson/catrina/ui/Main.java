@@ -11,11 +11,14 @@ import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
-import mx.itson.catrina.entidades.EstadoCuenta;
-import mx.itson.catrina.entidades.Movimiento;
+import mx.itson.catrina.entidades.*;
 import mx.itson.catrina.enumerador.Tipo;
 
 /**
@@ -24,6 +27,7 @@ import mx.itson.catrina.enumerador.Tipo;
  */
 public class Main extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form Main
      */
@@ -42,9 +46,9 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxMeses = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMovimientos = new javax.swing.JTable();
         lblNombre = new javax.swing.JLabel();
@@ -81,19 +85,19 @@ public class Main extends javax.swing.JFrame {
 
         jLabel2.setText("Seleccione el mes:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbxMeses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Selecciona--", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        cbxMeses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbxMesesActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Seleccione el archivo a cargar:");
 
-        jButton1.setText("Buscar...");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("Buscar...");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -199,11 +203,11 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxMeses, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(btnBuscar)
                         .addGap(24, 24, 24))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,9 +255,9 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnBuscar))
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -312,7 +316,7 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try{
             //Utilizamos en JFileChooser para poder llamar al archivo
         JFileChooser jfileChooser = new JFileChooser();
@@ -358,44 +362,77 @@ public class Main extends javax.swing.JFrame {
         
         Locale local = new Locale("es","MX");
         NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(local);
-        
-        double subtotal=0;
+       
+        double saldoInicial=0;
         double retiros=0;
         double depositos=0;
-        Movimiento mov = new Movimiento();
-        //Se acomodan los datos de la tabla en sus respectivos lugares y se mandan a imprimir junto con los datos de resumen
-        for(Movimiento d : estado.getMovimientos()){
+        int meses= cbxMeses.getSelectedIndex()-1;
+        System.out.println(meses);
+        
+        List<Movimiento>movimientos = new ArrayList();
+       for(Movimiento d : estado.getMovimientos()){
+           System.out.println(d.getFecha().getMonth());
+            if(meses==d.getFecha().getMonth()){
+            movimientos.add(d);
+            }else if(meses>d.getFecha().getMonth()){
+             if(d.getTipo()==Tipo.Desposito){
+                 saldoInicial+=d.getCantidad();
+            }else{
+                saldoInicial+=d.getCantidad();
+            }   
+            }
+            
+       }
+            movimientos.sort((mov1,mov2)->mov1.getFecha().compareTo(mov2.getFecha()));
+            
+           if(meses>0){ 
+            for(Movimiento b : movimientos){
             //Validamos si la cantidad ingresada es deposito o retiro
-            if(d.getTipo()==Tipo.Desposito){
-                d.setDeposito(d.getCantidad());
-                subtotal+=d.getCantidad();
-                d.setSubTotal(subtotal);
-                depositos+=d.getDeposito();
+            if(b.getTipo()==Tipo.Desposito){
+                b.setDeposito(b.getCantidad());
+                depositos+=b.getDeposito();
                 
             }else{
-                d.setRetiro(d.getCantidad());
-                subtotal-=d.getCantidad();
-                d.setSubTotal(subtotal);
-                retiros+=d.getRetiro();
+                b.setRetiro(b.getCantidad());
+                retiros+=b.getRetiro();
                 
             }
             
-                modelo.addRow(new Object []{formatFecha.format(d.getFecha()),d.getDescripcion(),formatoMoneda.format(d.getDeposito()),formatoMoneda.format(d.getRetiro()),formatoMoneda.format(d.getSubTotal())});
-                lblDepositos.setText(""+formatoMoneda.format(depositos));
-                lblRetiros.setText(""+formatoMoneda.format(retiros));
-                lblSaldoFinal.setText(""+formatoMoneda.format(d.getSubTotal()));
+                modelo.addRow(new Object []{formatFecha.format(b.getFecha()),b.getDescripcion(),formatoMoneda.format(b.getDeposito()),formatoMoneda.format(b.getRetiro()),formatoMoneda.format(b.getSubTotal())});
+               
             }
-        
-        
+            }else{
+               for(Movimiento b : estado.getMovimientos()){
+            //Validamos si la cantidad ingresada es deposito o retiro
+            if(b.getTipo()==Tipo.Desposito){
+                b.setDeposito(b.getCantidad());
+                depositos+=b.getDeposito();
+                
+            }else{
+                b.setRetiro(b.getCantidad());
+                retiros+=b.getRetiro();
+                
+            }
+            
+                modelo.addRow(new Object []{formatFecha.format(b.getFecha()),b.getDescripcion(),formatoMoneda.format(b.getDeposito()),formatoMoneda.format(b.getRetiro()),formatoMoneda.format(depositos-retiros)});
+                
+           }
+           }
+           lblSaldoInicial.setText(""+saldoInicial);
+           lblDepositos.setText(""+formatoMoneda.format(depositos));
+           lblRetiros.setText(""+formatoMoneda.format(retiros));
+           lblSaldoFinal.setText(""+formatoMoneda.format(depositos-retiros));
+       
         }catch(Exception e){
             //Si ocurrio algo mal en el momento de relizar la acción se mandara un mensaje de error
             System.err.print("Ocurrio un error: "+e.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void cbxMesesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMesesActionPerformed
+
+       
+    }//GEN-LAST:event_cbxMesesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -433,8 +470,8 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JComboBox<String> cbxMeses;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

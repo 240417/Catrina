@@ -7,6 +7,7 @@ package mx.itson.catrina.entidades;
 
 import com.google.gson.Gson;
 import java.util.List;
+import mx.itson.catrina.enumerador.Tipo;
 
 /**
  *
@@ -32,10 +33,10 @@ public class EstadoCuenta {
         }catch(Exception er){
             System.err.print("Ocurrio un error: "+er.getMessage());
         }
-        return estado;
+      return estado;   
     }
     
-    
+        
     /**
      * @return the producto
      */
@@ -116,7 +117,8 @@ public class EstadoCuenta {
     /**
      * @param movimientos the movimientos to set
      */
-    public void setMovimientos(List<Movimiento> movimientos) {
+    public void setMovimientos(List<Movimiento> movimientos, String contenido) {
+        
         this.movimientos = movimientos;
     }
 

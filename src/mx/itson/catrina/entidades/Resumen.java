@@ -5,7 +5,12 @@
  */
 package mx.itson.catrina.entidades;
 
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
+import javax.swing.table.DefaultTableModel;
 import mx.itson.catrina.enumerador.Tipo;
 
 /**
@@ -18,9 +23,8 @@ public class Resumen {
     private double depositos;
     private double retiros;
     private double saldoFinal;
-    private Movimiento movimientos;
-    private List<Movimiento>movimiento;
 
+    
     /**
      * @return the saldoInicial
      */
@@ -33,17 +37,7 @@ public class Resumen {
      * @param saldoInicial the saldoInicial to set
      */
     public void setSaldoInicial(double saldoInicial) {
-        
-        for(Movimiento d : getMovimiento()){
-            //Validamos si la cantidad ingresada es deposito o retiro
-            if(d.getTipo()==Tipo.Desposito){
-                saldoInicial += d.getCantidad();
-            }else{
-                saldoInicial -= d.getCantidad();
-            }
-                
-            }
-        
+
         this.saldoInicial = saldoInicial;
     }
 
@@ -58,14 +52,6 @@ public class Resumen {
      * @param depositos the depositos to set
      */
     public void setDepositos(double depositos) {
-        
-        for(Movimiento d : getMovimiento()){
-        //Validamos si la cantidad ingresada es deposito o retiro
-            if(d.getTipo()==Tipo.Desposito){
-                depositos+=d.getCantidad();
-            }
-            
-        }
         this.depositos = depositos;
     }
 
@@ -80,14 +66,6 @@ public class Resumen {
      * @param retiros the retiros to set
      */
     public void setRetiros(double retiros) {
-        
-         for(Movimiento d : getMovimiento()){
-        //Validamos si la cantidad ingresada es deposito o retiro
-            if(d.getTipo()==Tipo.Retiro){
-                retiros+=d.getCantidad();
-                
-            }
-        }
          
         this.retiros = retiros;
     }
@@ -105,34 +83,4 @@ public class Resumen {
     public void setSaldoFinal(double saldoFinal) {
         this.saldoFinal = saldoFinal;
     }
-
-    /**
-     * @return the movimientos
-     */
-    public Movimiento getMovimientos() {
-        return movimientos;
-    }
-
-    /**
-     * @param movimientos the movimientos to set
-     */
-    public void setMovimientos(Movimiento movimientos) {
-        this.movimientos = movimientos;
-    }
-
-    /**
-     * @return the movimiento
-     */
-    public List<Movimiento> getMovimiento() {
-        return movimiento;
-    }
-
-    /**
-     * @param movimiento the movimiento to set
-     */
-    public void setMovimiento(List<Movimiento> movimiento) {
-        this.movimiento = movimiento;
-    }
-    
-    
 }

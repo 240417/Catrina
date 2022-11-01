@@ -11,7 +11,9 @@ import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
@@ -34,22 +36,6 @@ public class Movimiento {
     private double depositos;
     private double retiros;
     
-    /*public double getMovimientos(String contenido,double subTotal){
-        //Importamos el documento deserealizado
-        EstadoCuenta estado = new EstadoCuenta().deserializar(contenido);
-        
-        //Se acomodan los datos de la tabla en sus respectivos lugares y se mandan a imprimir junto con los datos de resumen
-        for(Movimiento d : estado.getMovimientos()){
-            //Validamos si la cantidad ingresada es deposito o retiro
-            if(d.tipo==Tipo.Desposito){
-                subTotal+=d.getCantidad();
-            }else{
-                subTotal-=cantidad;
-                
-            }
-            }
-        return subTotal;
-    }*/
      
     /**
      * @return the descripcion
@@ -138,10 +124,7 @@ public class Movimiento {
      * @param retiro the retiro to set
      */
     public void setRetiro(double retiro) {
-        
-        //if(){
-          //  retiro=cantidad;
-        //}
+
         this.retiro = retiro;
     }
 
@@ -155,11 +138,14 @@ public class Movimiento {
     /**
      * @param subTotal the subTotal to set
      */
-    public void setSubTotal(double subTotal) {
+    public void setSubTotal(double subTotal, int meses) {
         
         this.subTotal = subTotal;
     }
 
+    /**
+     * @return the saldoInicial
+     */
     /**
      * @return the saldoInicial
      */
@@ -202,11 +188,6 @@ public class Movimiento {
     public void setRetiros(double retiros) {
         this.retiros = retiros;
     }
-
-    private static class lista {
-
-        public lista() {
-        }
-    }
-    
 }
+
+
