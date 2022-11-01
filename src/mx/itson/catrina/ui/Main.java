@@ -368,6 +368,7 @@ public class Main extends javax.swing.JFrame {
             }   
             }
             
+            
        }
        //Se ordenan las fechas
             movimientos.sort((mov1,mov2)->mov1.getFecha().compareTo(mov2.getFecha()));
@@ -385,7 +386,7 @@ public class Main extends javax.swing.JFrame {
                 
             }
             //Imprimimos la lista
-                modelo.addRow(new Object []{formatFecha.format(b.getFecha()),b.getDescripcion(),formatoMoneda.format(b.getDeposito()),formatoMoneda.format(b.getRetiro()),formatoMoneda.format(depositos-retiros)});
+                modelo.addRow(new Object []{formatFecha.format(b.getFecha()),b.getDescripcion(),formatoMoneda.format(b.getDeposito()),formatoMoneda.format(b.getRetiro()),formatoMoneda.format(saldoInicial+(depositos-retiros))});
                
             }
             }else{
@@ -405,8 +406,8 @@ public class Main extends javax.swing.JFrame {
                 
            }
            }
-           saldoFinal=depositos-retiros;
            //Imprimimos los datos del resumen
+           saldoFinal=saldoInicial+(depositos-retiros);
            lblSaldoInicial.setText(""+formatoMoneda.format(saldoInicial));
            lblDepositos.setText(""+formatoMoneda.format(depositos));
            lblRetiros.setText(""+formatoMoneda.format(retiros));
