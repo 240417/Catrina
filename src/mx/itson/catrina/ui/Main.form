@@ -48,11 +48,11 @@
                           <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblSaldoFinal" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblRetiros" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblDepositos" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblSaldoInicial" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblDepositos" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lblRetiros" max="32767" attributes="0"/>
+                          <Component id="lblSaldoInicial" min="-2" pref="59" max="-2" attributes="0"/>
+                          <Component id="lblSaldoFinal" alignment="0" pref="69" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -70,24 +70,25 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel5" min="-2" pref="282" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lblMoneda" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lblClabe" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                              <Component id="lblCuenta" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="lblMoneda" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="lblClabe" alignment="0" pref="93" max="32767" attributes="0"/>
+                                  <Component id="lblCuenta" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -113,63 +114,58 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblRfc" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCuenta" min="-2" pref="21" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="3" min="-2" pref="17" max="-2" attributes="0"/>
-                          <Component id="lblClabe" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblClabe" alignment="0" min="-2" pref="17" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblLugar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblMoneda" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMoneda" alignment="3" min="-2" pref="17" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblCp" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblSaldoInicial" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblSaldoInicial" min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblDepositos" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jLabel13" max="32767" attributes="0"/>
+                  <Component id="lblDepositos" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblRetiros" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jLabel17" max="32767" attributes="0"/>
+                  <Component id="lblRetiros" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel18" min="-2" pref="25" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="328" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="lblSaldoFinal" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="lblSaldoFinal" min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+              <Component id="jLabel18" min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="274" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -403,39 +399,18 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCuenta">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel19"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblClabe">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel20"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMoneda">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel21"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblSaldoInicial">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel22"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDepositos">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel23"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblRetiros">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel24"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblSaldoFinal">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel25"/>
-      </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
 
