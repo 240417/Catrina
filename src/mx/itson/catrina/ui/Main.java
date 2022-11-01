@@ -363,17 +363,19 @@ public class Main extends javax.swing.JFrame {
         Locale local = new Locale("es","MX");
         NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(local);
        
+        //Se crean variables para consegir los datos del resumen
         double saldoInicial=0;
         double retiros=0;
         double depositos=0;
         int meses= cbxMeses.getSelectedIndex()-1;
-        System.out.println(meses);
         
+        // Se crea una lista para almacenar los dias del mes 
         List<Movimiento>movimientos = new ArrayList();
        for(Movimiento d : estado.getMovimientos()){
-           System.out.println(d.getFecha().getMonth());
+ //se valida si el mes seleccionado es igual al mes de la fecha
             if(meses==d.getFecha().getMonth()){
             movimientos.add(d);
+            //Si no es igual y es menor se sumaran las cantidades para el saldo inicial anterior
             }else if(meses>d.getFecha().getMonth()){
              if(d.getTipo()==Tipo.Desposito){
                  saldoInicial+=d.getCantidad();
@@ -383,9 +385,10 @@ public class Main extends javax.swing.JFrame {
             }
             
        }
+       //Se ordenan las fechas
             movimientos.sort((mov1,mov2)->mov1.getFecha().compareTo(mov2.getFecha()));
-            
-           if(meses>0){ 
+            //Se valida si el mes es mayor a 0 y si no lo es se imprimira toda la lista de datos
+           if(meses>-1){ 
             for(Movimiento b : movimientos){
             //Validamos si la cantidad ingresada es deposito o retiro
             if(b.getTipo()==Tipo.Desposito){
@@ -397,7 +400,7 @@ public class Main extends javax.swing.JFrame {
                 retiros+=b.getRetiro();
                 
             }
-            
+            //Imprimimos la lista
                 modelo.addRow(new Object []{formatFecha.format(b.getFecha()),b.getDescripcion(),formatoMoneda.format(b.getDeposito()),formatoMoneda.format(b.getRetiro()),formatoMoneda.format(b.getSubTotal())});
                
             }
@@ -413,11 +416,12 @@ public class Main extends javax.swing.JFrame {
                 retiros+=b.getRetiro();
                 
             }
-            
+            //Imprimimos la tabla
                 modelo.addRow(new Object []{formatFecha.format(b.getFecha()),b.getDescripcion(),formatoMoneda.format(b.getDeposito()),formatoMoneda.format(b.getRetiro()),formatoMoneda.format(depositos-retiros)});
                 
            }
            }
+           //Imprimimos los datos del resumen
            lblSaldoInicial.setText(""+saldoInicial);
            lblDepositos.setText(""+formatoMoneda.format(depositos));
            lblRetiros.setText(""+formatoMoneda.format(retiros));
